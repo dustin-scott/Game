@@ -2,8 +2,7 @@
 // Name        : Game.cpp
 // Author      :
 // Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Driver class for Game
 //============================================================================
 #include "GameTypes.h"
 #include <iostream>
