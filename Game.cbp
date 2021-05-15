@@ -30,7 +30,51 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 		</Compiler>
+		<Linker>
+			<Add library="GLEW" />
+			<Add library="GL" />
+			<Add library="GLU" />
+			<Add library="glut" />
+			<Add library="ILUT" />
+			<Add library="ILU" />
+			<Add library="IL" />
+			<Add library="openal" />
+			<Add library="alut" />
+		</Linker>
+		<Unit filename="src/Cuboid.cpp" />
+		<Unit filename="src/Cuboid.h" />
+		<Unit filename="src/GLBitmap.cpp" />
+		<Unit filename="src/GLBitmap.h" />
+		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/GameAudio.cpp" />
+		<Unit filename="src/GameAudio.h" />
+		<Unit filename="src/GameDrawable.cpp" />
+		<Unit filename="src/GameDrawable.h" />
+		<Unit filename="src/GameObject.cpp" />
+		<Unit filename="src/GameObject.h" />
+		<Unit filename="src/GameScreen.cpp" />
+		<Unit filename="src/GameScreen.h" />
+		<Unit filename="src/GameTypes.h" />
+		<Unit filename="src/GameWindow.cpp" />
+		<Unit filename="src/GameWindow.h" />
+		<Unit filename="src/Math/GLMatrix.cpp" />
+		<Unit filename="src/Math/GLMatrix.h" />
+		<Unit filename="src/Math/GLTransformationMatrix.cpp" />
+		<Unit filename="src/Math/GLTransformationMatrix.h" />
+		<Unit filename="src/Math/GLVector.cpp" />
+		<Unit filename="src/Math/GLVector.h" />
+		<Unit filename="src/Math/Math.cpp" />
+		<Unit filename="src/Math/Math.h" />
+		<Unit filename="src/ObjModel.cpp" />
+		<Unit filename="src/ObjModel.h" />
+		<Unit filename="src/Quad.cpp" />
+		<Unit filename="src/Quad.h" />
+		<Unit filename="src/TitleScreen.cpp" />
+		<Unit filename="src/TitleScreen.h" />
+		<Unit filename="src/obj_model.cpp" />
+		<Unit filename="src/obj_model.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
