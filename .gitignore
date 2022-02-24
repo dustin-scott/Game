@@ -33,3 +33,7 @@
 
 bin/
 obj/
+/.idea
+/.vscode
+/.project
+/build
