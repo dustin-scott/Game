@@ -183,7 +183,7 @@ namespace game
 
 								ilutRenderer(ILUT_OPENGL);
 
-								material_group_texture_ids[material_group_iterator] = ilutGLLoadImage((char*)material_group->material->map_diffuse.path);
+								//material_group_texture_ids[material_group_iterator] = ilutGLLoadImage((char*)material_group->material->map_diffuse.path);
 								glDisable(GL_TEXTURE_2D);
 								//printf("object %s's map_ambient: %s\n", this->model->objects[i].name, material_group->material->map_ambient.path);
 								material_group_iterator++;
