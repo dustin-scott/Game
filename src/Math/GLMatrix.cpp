@@ -1,10 +1,3 @@
-/*
- * GLMatrix.cpp
- *
- *  Created on: Dec 23, 2012
- *      Author: dustin
- */
-
 #include "GLMatrix.h"
 namespace game {
 

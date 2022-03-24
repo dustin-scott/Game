@@ -1,10 +1,3 @@
-/*
- * GameDrawable.h
- *
- *  Created on: Dec 1, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef GAMEDRAWABLE_H_
 #define GAMEDRAWABLE_H_
 #include "GameObject.h"

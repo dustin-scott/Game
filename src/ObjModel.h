@@ -1,10 +1,3 @@
-/*
- * ObjModel.h
- *
- *  Created on: Jan 12, 2013
- *      Author: Dustin Scott
- */
-
 #ifndef OBJMODEL_H_
 #define OBJMODEL_H_
 

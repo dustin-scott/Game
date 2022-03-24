@@ -1,10 +1,3 @@
-/*
- * GameWindow.cpp
- *
- *  Created on: Nov 24, 2012
- *      Author: Dustin Scott
- */
-
 #include "GameWindow.h"
 #include <vector>
 #include <string>

@@ -1,10 +1,3 @@
-/*
- * Quad.h
- *
- *  Created on: Jan 12, 2013
- *      Author: Dustin Scott
- */
-
 #ifndef QUAD_H_
 #define QUAD_H_
 

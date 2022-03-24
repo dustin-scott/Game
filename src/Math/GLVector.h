@@ -1,10 +1,3 @@
-/*
- * GLVector.h
- *
- *  Created on: Dec 29, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef GLVECTOR_H_
 #define GLVECTOR_H_
 

@@ -1,10 +1,3 @@
-/*
- * Cuboid.h
- *
- *  Created on: May 5, 2013
- *      Author: Dustin Scott
- */
-
 #ifndef CUBOID_H_
 #define CUBOID_H_
 

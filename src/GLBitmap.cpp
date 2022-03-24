@@ -1,10 +1,3 @@
-/*
- * GLBitmap.cpp
- *
- *  Created on: Nov 25, 2012
- *      Author: Dustin Scott
- */
-
 #include "GLBitmap.h"
 
 namespace game

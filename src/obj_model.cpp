@@ -1,9 +1,3 @@
-/*
- * obj_model.c
- *
- *  Created on: Jan 12, 2013
- *      Author: Dustin Scott
- */
 #include "obj_model.h"
 #include <cstdio>
 

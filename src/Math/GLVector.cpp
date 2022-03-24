@@ -1,10 +1,3 @@
-/*
- * GLVector.cpp
- *
- *  Created on: Dec 29, 2012
- *      Author: Dustin Scott
- */
-
 #include "GLVector.h"
 
 namespace game

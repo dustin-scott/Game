@@ -1,10 +1,3 @@
-/*
- * ObjModel.cpp
- *
- *  Created on: Jan 12, 2013
- *      Author: Dustin Scott
- */
-
 #include "ObjModel.h"
 #include <iostream>
 #include <GL/glew.h>

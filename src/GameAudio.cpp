@@ -1,10 +1,3 @@
-/*
- * GameAudio.cpp
- *
- *  Created on: Dec 1, 2012
- *      Author: Dustin Scott
- */
-
 #include "GameAudio.h"
 #include <stdlib.h>
 #include <stdio.h>

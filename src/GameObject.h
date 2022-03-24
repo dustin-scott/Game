@@ -1,10 +1,3 @@
-/*
- * GameObject.h
- *
- *  Created on: Dec 23, 2012
- *      Author: dustin
- */
-
 #ifndef GAMEOBJECT_H_
 #define GAMEOBJECT_H_
 #include "GameTypes.h"

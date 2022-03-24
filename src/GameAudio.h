@@ -1,10 +1,3 @@
-/*
- * GameAudio.h
- *
- *  Created on: Dec 1, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef GAMEAUDIO_H_
 #define GAMEAUDIO_H_
 

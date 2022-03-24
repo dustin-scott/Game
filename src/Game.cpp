@@ -12,7 +12,6 @@
 #include "Math/GLTransformationMatrix.h"
 #include "Math/Math.h"
 #include "Quad.h"
-#include "ObjModel.h"
 #include <AL/al.h>
 #include <AL/alut.h>
 #include <GL/gl.h>
@@ -48,6 +47,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
-
-

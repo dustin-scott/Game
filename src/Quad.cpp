@@ -1,10 +1,3 @@
-/*
- * Quad.cpp
- *
- *  Created on: Jan 12, 2013
- *      Author: Dustin Scott
- */
-
 #include "Quad.h"
 #include "GL/gl.h"
 namespace game

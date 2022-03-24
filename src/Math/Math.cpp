@@ -1,10 +1,3 @@
-/*
- * Math.cpp
- *
- *  Created on: Dec 29, 2012
- *      Author: Dustin Scott
- */
-
 #include "Math.h"
 
 namespace game

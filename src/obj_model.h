@@ -1,10 +1,3 @@
-/*
- * obj_model.h
- *
- *  Created on: Jan 12, 2013
- *      Author: Dustin Scott
- */
-
 #ifndef OBJ_MODEL_H_
 #define OBJ_MODEL_H_
 #include <cstring>

@@ -1,10 +1,3 @@
-/*
- * Cuboid.cpp
- *
- *  Created on: May 5, 2013
- *      Author: Dustin Scott
- */
-
 #include "Cuboid.h"
 
 namespace game

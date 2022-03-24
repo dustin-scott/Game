@@ -1,10 +1,3 @@
-/*
- * GameScreen.cpp
- *
- *  Created on: Dec 9, 2012
- *      Author: Dustin Scott
- */
-
 #include "GameScreen.h"
 
 namespace game

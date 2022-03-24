@@ -1,10 +1,3 @@
-/*
- * GameObject.cpp
- *
- *  Created on: Dec 23, 2012
- *      Author: dustin
- */
-
 #include "GameObject.h"
 namespace game
 {

@@ -1,12 +1,3 @@
-/*
- * GameScreen.h
- *
- *  Created on: Dec 9, 2012
- *      Author: Dustin Scott
- *
- * @purpose generic object representing Screen specific logic. title_screen, loading_screen, etc.
- */
-
 #ifndef GAMESCREEN_H_
 #define GAMESCREEN_H_
 #include <list>

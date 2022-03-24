@@ -1,10 +1,3 @@
-/*
- * GLBitmap.h
- *
- *  Created on: Nov 25, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef GLBITMAP_H_
 #define GLBITMAP_H_
 #include <stdlib.h>

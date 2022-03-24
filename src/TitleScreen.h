@@ -1,10 +1,3 @@
-/*
- * TitleScreen.h
- *
- *  Created on: Dec 10, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef TITLESCREEN_H_
 #define TITLESCREEN_H_
 

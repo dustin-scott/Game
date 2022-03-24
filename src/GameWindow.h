@@ -1,10 +1,3 @@
-/*
- * GameWindow.h
- *
- *  Created on: Nov 24, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef GAMEWINDOW_H_
 #define GAMEWINDOW_H_
 #include "GameTypes.h"

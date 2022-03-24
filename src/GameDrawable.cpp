@@ -1,10 +1,3 @@
-/*
- * GameDrawable.cpp
- *
- *  Created on: Dec 1, 2012
- *      Author: Dustin Scott
- */
-
 #include "GameDrawable.h"
 
 namespace game

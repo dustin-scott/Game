@@ -1,10 +1,3 @@
-/*
- * TitleScreen.cpp
- *
- *  Created on: Dec 10, 2012
- *      Author: Dustin Scott
- */
-
 #include "TitleScreen.h"
 #include "stdio.h"
 #include "Quad.h"

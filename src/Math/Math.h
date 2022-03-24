@@ -1,10 +1,3 @@
-/*
- * Math.h
- *
- *  Created on: Dec 29, 2012
- *      Author: Dustin Scott
- */
-
 #ifndef MATH_H_
 #define MATH_H_
 #include <cmath>
