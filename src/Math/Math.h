@@ -1,7 +1,7 @@
 #ifndef MATH_H_
 #define MATH_H_
 #include <cmath>
-#include "../GameTypes.h"
+#include "../Game/Types.h"
 namespace game
 {
 	static const GLfloat PI = 3.14159265;

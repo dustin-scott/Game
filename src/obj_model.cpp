@@ -756,7 +756,7 @@ void set_primary_attributes(obj_model* model, FILE* model_file)
 					else
 					{
 						char error[100];
-						sprintf(&error[0], "file malformed: %u elements", pieces.size());
+						sprintf(&error[0], "file malformed: %lu elements", pieces.size());
 
 						perror(error);
 						exit(1);
@@ -788,7 +788,7 @@ void set_primary_attributes(obj_model* model, FILE* model_file)
 					else
 					{
 						char error[100];
-						sprintf(&error[0], "file malformed: %u elements", pieces.size());
+						sprintf(&error[0], "file malformed: %lu elements", pieces.size());
 
 						perror(error);
 						exit(1);
@@ -835,7 +835,7 @@ void set_primary_attributes(obj_model* model, FILE* model_file)
 					else
 					{
 						char error[100];
-						sprintf(&error[0], "file malformed: %u elements", pieces.size());
+						sprintf(&error[0], "file malformed: %lu elements", pieces.size());
 
 						perror(error);
 						exit(1);

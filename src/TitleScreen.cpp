@@ -6,7 +6,7 @@ namespace game
 {
 	GameDrawable* moving_cube;
 	TitleScreen::TitleScreen() :
-			GameScreen()
+			Screen()
 	{
 		//game::GLDrawable* drawable1 = new game::GLDrawable("Images/title_screen.bmp");
 		game::Quad* drawable2 = new game::Quad(-0.5, 0.0, -2.0f, 0.0f, 0.0f, 0.0f, 0.0f,0.0f,0.0f);

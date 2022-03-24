@@ -4,7 +4,7 @@
 // Version     :
 // Description : Driver class for Game
 //============================================================================
-#include "GameTypes.h"
+#include "Game/Types.h"
 #include <iostream>
 #include "GameWindow.h"
 #include "TitleScreen.h"

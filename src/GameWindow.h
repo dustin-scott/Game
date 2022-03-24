@@ -1,6 +1,6 @@
 #ifndef GAMEWINDOW_H_
 #define GAMEWINDOW_H_
-#include "GameTypes.h"
+#include "Game/Types.h"
 #include <stdio.h>
 #include <algorithm>
 #include <unistd.h>
@@ -8,7 +8,7 @@
 #include <list>
 #include "GLBitmap.h"
 #include "GameDrawable.h"
-#include "GameScreen.h"
+#include "Game/Screen.h"
 namespace game
 {
 
@@ -17,7 +17,7 @@ class GameWindow
 private:
 	static int glut_window;
 	static char* title;
-	//static GameScreen* screen;
+	//static Screen* screen;
 	static void draw(void);
 	static void idle(void);
 	static void reshape(int width, int height);
@@ -32,7 +32,7 @@ public:
 	void close(void);
 	void main_loop(void);
 	void set_title(const char* title);
-	void set_screen(GameScreen* screen);
+	void set_screen(Screen* screen);
 	char* get_title();
 	GameWindow(int argc, char** argv);
 	virtual ~GameWindow();

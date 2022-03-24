@@ -15,7 +15,7 @@ namespace game
 			void set_x(GLfloat x);
 			void set_y(GLfloat y);
 			void set_z(GLfloat z);
-			GLVector* cross(GLVector* b);
+			GLVector cross(GLVector &b);
 			GLVector();
 			virtual ~GLVector();
 	};

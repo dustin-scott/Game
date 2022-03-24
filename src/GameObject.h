@@ -1,6 +1,6 @@
 #ifndef GAMEOBJECT_H_
 #define GAMEOBJECT_H_
-#include "GameTypes.h"
+#include "Game/Types.h"
 #include "Math/GLTransformationMatrix.h"
 namespace game {
 class GameObject {

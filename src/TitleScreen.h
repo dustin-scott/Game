@@ -1,14 +1,14 @@
 #ifndef TITLESCREEN_H_
 #define TITLESCREEN_H_
 
-#include "GameScreen.h"
+#include "Game/Screen.h"
 #include <GL/freeglut.h>
 #include "Math/Math.h"
 #include "ObjModel.h"
 namespace game
 {
 	
-	class TitleScreen: public game::GameScreen
+	class TitleScreen: public game::Screen
 	{
 		private:
 			bool keys[256];

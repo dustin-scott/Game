@@ -7,10 +7,10 @@
 namespace game
 {
 	
-	class GameScreen
+	class Screen
 	{
 		public:
-			GameScreen();
+			Screen();
 			virtual void key_down(unsigned char key, int x, int y) = 0;
 			virtual void key_up(unsigned char key, int x, int y) = 0;
 			virtual void special_key_down(int key, int x, int y) = 0;
@@ -19,7 +19,7 @@ namespace game
 			virtual void tick(void) = 0;
 			std::list<GameDrawable*> drawable_list;
 			GameObject* camera;
-			virtual ~GameScreen();
+			virtual ~Screen();
 	};
 
 } /* namespace game */

@@ -19,7 +19,7 @@ namespace game
 // nehe example above
 
 	char* GameWindow::title;
-	GameScreen* screen = 0;
+	Screen* screen = 0;
 	char title_buffer[255];
 	int frame = 0, time, timebase = 0;
 //-----------------------------------------------------------------------------
@@ -343,7 +343,7 @@ namespace game
 		GameWindow::title = (char*)title;
 	}
 
-	void GameWindow::set_screen(GameScreen* assign_screen)
+	void GameWindow::set_screen(Screen* assign_screen)
 	{
 		screen = assign_screen;
 	}

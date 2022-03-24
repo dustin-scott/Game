@@ -31,9 +31,11 @@ namespace game
 	{
 		this->set_element(0, 2, z);
 	}
-	GLVector* GLVector::cross(GLVector* b)
+	GLVector GLVector::cross(GLVector &b)
 	{
-
+		//TODO: implement crossing
+		GLVector result;
+		return result;
 	}
 	GLVector::~GLVector()
 	{

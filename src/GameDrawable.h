@@ -1,7 +1,7 @@
 #ifndef GAMEDRAWABLE_H_
 #define GAMEDRAWABLE_H_
 #include "GameObject.h"
-#include "GameTypes.h"
+#include "Game/Types.h"
 
 namespace game {
 

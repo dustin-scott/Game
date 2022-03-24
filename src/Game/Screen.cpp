@@ -1,12 +1,12 @@
-#include "GameScreen.h"
+#include "Game/Screen.h"
 
 namespace game
 {
-	GameScreen::GameScreen()
+	Screen::Screen()
 	{
 		this->camera = new game::GameObject();
 	}
-	GameScreen::~GameScreen()
+	Screen::~Screen()
 	{
 		delete this->camera;
 		while(!this->drawable_list.empty())

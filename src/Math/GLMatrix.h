@@ -7,7 +7,7 @@
 
 #ifndef GLMATRIX_H_
 #define GLMATRIX_H_
-#include "../GameTypes.h"
+#include "../Game/Types.h"
 #include <string>
 #include <cstdio>
 #include "Math.h"
