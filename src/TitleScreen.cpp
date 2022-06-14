@@ -2,6 +2,14 @@
 #include "stdio.h"
 #include "Quad.h"
 #include "Cuboid.h"
+
+// Define these only in *one* .cc file.
+#define TINYGLTF_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+// #define TINYGLTF_NOEXCEPTION // optional. disable exception handling.include "Cuboid.h"
+#include "../tinygltf/tiny_gltf.h"
+
 namespace game
 {
 	GameDrawable* moving_cube;
@@ -18,6 +26,8 @@ namespace game
 		//this->drawable_list.push_front(drawable1);
 		drawable2->set_color(1.0f, 0.0f, 0.0f);
 		this->drawable_list.push_front(drawable2);
+
+        tinygltf::TinyGLTF tinygltf;
 
 		int i = 0;
 		int j = 0;
