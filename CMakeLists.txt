@@ -20,6 +20,8 @@ find_package(GLUT REQUIRED)
 find_package(DevIL REQUIRED)
 find_package(OpenAL REQUIRED)
 find_package(ALUT REQUIRED)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 include_directories(
 	src 
@@ -40,4 +42,5 @@ target_link_libraries(
 	${ILU_LIBRARIES} 
 	${ILUT_LIBRARIES}
 	${OPENAL_LIBRARY} 
-	${ALUT_LIBRARIES} )
+	${ALUT_LIBRARIES} 
+  	${CONAN_LIBS})
