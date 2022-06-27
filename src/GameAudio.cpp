@@ -21,7 +21,7 @@ ALfloat source1Vel[] = { 0.0, 0.0, 0.0 };
 
 ALfloat source2Pos[] = { 0.0, 0.0, -4.0 };
 ALfloat source2Vel[] = { 0.0, 0.0, 0.0 };
-ALCdevice *dev;
+ALCdevice *device;
 
 ALuint buffer[NUM_BUFFERS];
 ALuint source[NUM_SOURCES];
@@ -39,63 +39,28 @@ namespace game
 
 	GameAudio::GameAudio(int argc, char** argv)
 	{
+		//reset error stack.
+		alGetError();
+
 		this->playing = 0;
 		//initialize openAL
 		//alutInit(&argc, argv);
-		
-		dev = alcOpenDevice(NULL);
-		if(!dev)
+		device = alcOpenDevice(NULL);
+		if (!device)
 		{
 			fprintf(stderr, "Oops\n");
 			exit(1);
 		}
+		this->initializeContext();
+		this->initializeDevices();
+		this->initializeListeners();
+		this->initializeBuffers();
+		this->initializeSources();
+		this->loadDataIntoBuffers();
 
-		ALCcontext *context;
-
-		context = alcCreateContext(dev, NULL);
-		if (!alcMakeContextCurrent(context))
-		{
-			fprintf(stderr, "Oops\n");
-			exit(1);
-		}
 		char al_bool;
 
 		// alutInit(0, NULL) ;
-
-		alListenerfv(AL_POSITION, listenerPos);
-		alListenerfv(AL_VELOCITY, listenerVel);
-		alListenerfv(AL_ORIENTATION, listenerOri);
-
-		alGetError(); /* clear error */
-
-		// Generate buffers, or no sound will be produced
-		alGenBuffers(NUM_BUFFERS, buffer);
-		if (alGetError() != AL_NO_ERROR)
-		{
-			printf("- Error creating buffers !!\n");
-			exit(1);
-		}
-		else
-		{
-			printf("Created buffers\n");
-		}
-
-		//Music: https://www.bensound.com
-        std::string file_name = "Audio/bensound-epic.wav";
-		//alutLoadWAVFile(&file_name[0], &format, &data, &size, &freq, &al_bool);
-		AudioFile<double> file;
-		if(!file.load(file_name))
-		{
-			printf("Error loading file %s \n", file_name);
-			exit(1);
-		}
-		else
-		{
-			data = reinterpret_cast<ALvoid*>(file.samples[0].data());
-			size = file.samples[0].size();
-			freq = file.getSampleRate();
-			alBufferData(buffer[0], format, data, size, freq);
-		}
 
 		
 		//Uncomment when another audio library is found to load raw data.
@@ -105,7 +70,6 @@ namespace game
 		
 		//alutUnloadWAV(format, data, size, freq);
 
-		printf("%s\n", &file_name[0]);
 		/*
 		 alutLoadWAVFile("29 Trailer Theme - Part 1.wav",&format,&data,&size,&freq, &al_bool);
 		 alBufferData(buffer[1],format,data,size,freq);
@@ -116,6 +80,77 @@ namespace game
 		 alutUnloadWAV(format,data,size,freq);
 		 */
 		alGetError(); /* clear error */
+
+		started_resources++;
+	}
+
+	void GameAudio::initializeDevices()
+	{	
+		alGetError();
+		ALCenum error;
+		const ALCchar *devices = alcGetString(NULL, ALC_DEVICE_SPECIFIER);
+		error = alGetError();
+		if (error != AL_NO_ERROR)
+		{
+        	fprintf(stdout, "AL error found on alcGetString! %d\n", error);
+			if(error == AL_INVALID_OPERATION)
+			{
+				printf("Operation was invalid.\n");
+			}
+			exit(1);
+		}
+
+        const ALCchar *device = devices, *next = devices + 1;
+        size_t len = 0;
+
+        fprintf(stdout, "Devices list:\n");
+        fprintf(stdout, "----------\n");
+        while (device && *device != '\0' && next && *next != '\0') {
+                fprintf(stdout, "%s\n", device);
+                len = strlen(device);
+                device += (len + 1);
+                next += (len + 2);
+        }
+        fprintf(stdout, "----------\n");
+
+		error = alGetError();
+		if (error != AL_NO_ERROR)
+		{
+        	fprintf(stdout, "AL error found! %d\n", error);
+			exit(1);
+		}
+	}
+
+	void GameAudio::initializeContext()
+	{
+		ALCcontext *context;
+
+		context = alcCreateContext(device, NULL);
+		if (!alcMakeContextCurrent(context))
+		{
+			fprintf(stderr, "Oops\n");
+			exit(1);
+		}
+	}
+
+	void GameAudio::initializeListeners()
+	{
+		alListenerfv(AL_POSITION, listenerPos);
+		alListenerfv(AL_VELOCITY, listenerVel);
+		alListenerfv(AL_ORIENTATION, listenerOri);
+
+		ALCenum error;
+		error = alGetError();
+
+		if (error != AL_NO_ERROR)
+		{
+        	fprintf(stdout, "AL error found!\n");
+			exit(1);
+		}
+	}
+
+	void GameAudio::initializeSources()
+	{
 		alGenSources(NUM_SOURCES, source);
 
 		if (alGetError() != AL_NO_ERROR)
@@ -144,8 +179,46 @@ namespace game
 		alSourcefv(source[2], AL_VELOCITY, source2Vel);
 		alSourcei(source[2], AL_BUFFER, buffer[2]);
 		alSourcei(source[2], AL_LOOPING, AL_TRUE);
+	}
 
-		started_resources++;
+	void GameAudio::initializeBuffers()
+	{
+		alGetError();
+		ALCenum error;
+		// Generate buffers, or no sound will be produced
+		alGenBuffers(NUM_BUFFERS, buffer);
+		error = alGetError();
+		if (error != AL_NO_ERROR)
+		{
+			printf("- Error creating buffers %d!!\n", error);
+			exit(1);
+		}
+		else
+		{
+			printf("Created buffers\n");
+		}
+	}
+
+	void GameAudio::loadDataIntoBuffers()
+	{
+		//Music: https://www.bensound.com
+        std::string file_name = "Audio/bensound-epic.wav";
+		//alutLoadWAVFile(&file_name[0], &format, &data, &size, &freq, &al_bool);
+		AudioFile<double> file;
+		if(!file.load(file_name))
+		{
+			printf("Error loading file %s \n", file_name.c_str());
+			exit(1);
+		}
+		else
+		{
+			//TODO: Finish fixing this per https://github.com/adamstark/AudioFile/issues/9#issuecomment-670521283
+			data = reinterpret_cast<ALvoid*>(file.samples[0].data());
+			size = file.samples[0].size();
+			freq = file.getSampleRate();
+			alBufferData(buffer[0], format, data, size, freq);
+		}
+		printf("%s\n", &file_name[0]);
 	}
 
 	void GameAudio::play()
