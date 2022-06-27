@@ -5,9 +5,12 @@ class GameConan(ConanFile):
     requires = [
         ("freeglut/3.2.1"),
         ("glew/2.2.0"),
-        ("openal/1.21.1")
+        ("openal/1.19.1"),
+        ("audiofile/1.1.0"),
+        ("stb/20200203"),
+        ("tinygltf/2.5.0")
     ]
-    generators = "cmake", "gcc"
+    generators = "cmake", "CMakeDeps", "CMakeToolchain", "gcc"
     default_options = {"poco:shared": True, "openssl:shared": True}
 
     def build(self):

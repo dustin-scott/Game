@@ -4,9 +4,6 @@
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 #include <GL/glu.h>
-#include <IL/il.h>
-#include <IL/ilu.h>
-#include <IL/ilut.h>
 
 namespace game
 {
@@ -169,12 +166,6 @@ namespace game
 								//glBindBufferARB(GL_ARRAY_BUFFER_ARB, material_group_normal_ids[material_group_iterator]);
 								//glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(obj_normal)*material_group_normal_counts[material_group_iterator], &normals[0], GL_STATIC_DRAW_ARB);
 
-								glEnable(GL_TEXTURE_2D);
-								ilInit();
-								iluInit();
-								ilutInit();
-
-								ilutRenderer(ILUT_OPENGL);
 
 								//material_group_texture_ids[material_group_iterator] = ilutGLLoadImage((char*)material_group->material->map_diffuse.path);
 								glDisable(GL_TEXTURE_2D);
@@ -238,7 +229,6 @@ namespace game
 		glDeleteBuffersARB(material_group_valid_count, material_group_vertex_ids);
 		glDeleteBuffersARB(material_group_valid_count, material_group_texture_coordinate_ids);
 		glDeleteBuffersARB(material_group_valid_count, material_group_normal_ids);
-		ilDeleteImages(material_group_valid_count, material_group_texture_ids);
 
 		printf("\npreobj delete\n");
 		delete_obj_model(this->model);

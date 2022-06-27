@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <AL/al.h>
-#include <AL/alut.h>
+#include <AL/alc.h>
+#include <AudioFile.h>
 
 #define NUM_BUFFERS 1
 #define NUM_SOURCES 1
@@ -40,14 +41,23 @@ namespace game
 	{
 		this->playing = 0;
 		//initialize openAL
-		alutInit(&argc, argv);
-		/*
+		//alutInit(&argc, argv);
+		
 		dev = alcOpenDevice(NULL);
 		if(!dev)
 		{
 			fprintf(stderr, "Oops\n");
 			exit(1);
-		}*/
+		}
+
+		ALCcontext *context;
+
+		context = alcCreateContext(dev, NULL);
+		if (!alcMakeContextCurrent(context))
+		{
+			fprintf(stderr, "Oops\n");
+			exit(1);
+		}
 		char al_bool;
 
 		// alutInit(0, NULL) ;
@@ -71,10 +81,29 @@ namespace game
 		}
 
 		//Music: https://www.bensound.com
-        ALbyte file_name[] = "Audio/bensound-epic.wav";
-		alutLoadWAVFile(&file_name[0], &format, &data, &size, &freq, &al_bool);
-		alBufferData(buffer[0], format, data, size, freq);
-		alutUnloadWAV(format, data, size, freq);
+        std::string file_name = "Audio/bensound-epic.wav";
+		//alutLoadWAVFile(&file_name[0], &format, &data, &size, &freq, &al_bool);
+		AudioFile<double> file;
+		if(!file.load(file_name))
+		{
+			printf("Error loading file %s \n", file_name);
+			exit(1);
+		}
+		else
+		{
+			data = reinterpret_cast<ALvoid*>(file.samples[0].data());
+			size = file.samples[0].size();
+			freq = file.getSampleRate();
+			alBufferData(buffer[0], format, data, size, freq);
+		}
+
+		
+		//Uncomment when another audio library is found to load raw data.
+		//alBufferData(buffer[0], format, data, size, freq);
+		
+		
+		
+		//alutUnloadWAV(format, data, size, freq);
 
 		printf("%s\n", &file_name[0]);
 		/*

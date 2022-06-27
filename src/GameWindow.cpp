@@ -331,12 +331,6 @@ namespace game
 		this->width = 500;
 		GameWindow::glut_window = 0;
 		glEnable(GL_TEXTURE_2D);
-		 //  ----- Initialise DevIL -----
-		ilutRenderer(ILUT_OPENGL);
-		ilInit();
-		iluInit();
-		ilutInit();
-		ilutRenderer(ILUT_OPENGL);
 	}
 	void GameWindow::set_title(const char* title)
 	{

@@ -5,9 +5,6 @@
 #include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <GL/glext.h>
-#include <IL/il.h>
-#include <IL/ilu.h>
-#include <IL/ilut.h>
 namespace game
 {
 	typedef long unsigned int game_unsigned_int;

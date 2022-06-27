@@ -13,7 +13,6 @@
 #include "Math/Math.h"
 #include "Quad.h"
 #include <AL/al.h>
-#include <AL/alut.h>
 #include <GL/gl.h>
 
 using namespace std;
@@ -43,7 +42,6 @@ int main(int argc, char** argv)
                 << "Press p to start and stop music" << std::endl
                 << "Press ESC to exit" << std::endl;
 	window.main_loop();
-	alutExit();
 
 	return 0;
 }
