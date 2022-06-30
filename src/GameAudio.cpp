@@ -199,13 +199,149 @@ namespace game
 		}
 	}
 
+	template <typename T> T clip(const T& n, const T& lower, const T& upper) 
+	{
+		return std::max(lower, std::min(n, upper));
+	}
+
+	static inline uint8_t sampleToSingleByte (double sample)
+	{
+		sample = clip (sample, -1., 1.);
+		sample = (sample + 1.) / 2.;
+		return static_cast<uint8_t> (sample * 255.);
+	}
+
+	static inline int16_t sampleToSixteenBitInt (double sample)
+	{
+		sample = clip (sample, -1., 1.);
+		return static_cast<int16_t> (sample * 32767.);
+	}
+
+	static inline void addInt16ToFileData (std::vector<uint8_t>& fileData, int16_t i, bool isLittleEndian = true)
+	{
+		uint8_t bytes[2];
+		
+		if (isLittleEndian)
+		{
+			bytes[1] = (i >> 8) & 0xFF;
+			bytes[0] = i & 0xFF;
+		}
+		else
+		{
+			bytes[0] = (i >> 8) & 0xFF;
+			bytes[1] = i & 0xFF;
+		}
+		
+		fileData.push_back (bytes[0]);
+		fileData.push_back (bytes[1]);
+	}
+
+	static inline void addInt32ToFileData (std::vector<uint8_t>& fileData, int32_t i, bool isLittleEndian)
+	{
+		uint8_t bytes[4];
+		
+		if (isLittleEndian)
+		{
+			bytes[3] = (i >> 24) & 0xFF;
+			bytes[2] = (i >> 16) & 0xFF;
+			bytes[1] = (i >> 8) & 0xFF;
+			bytes[0] = i & 0xFF;
+		}
+		else
+		{
+			bytes[0] = (i >> 24) & 0xFF;
+			bytes[1] = (i >> 16) & 0xFF;
+			bytes[2] = (i >> 8) & 0xFF;
+			bytes[3] = i & 0xFF;
+		}
+		
+		for (int i = 0; i < 4; i++)
+			fileData.push_back (bytes[i]);
+	}
+
+	static inline ALenum toOpenAlFormat(short channels, short samples)
+	{
+		bool stereo = (channels > 1);
+
+		switch (samples) {
+		case 16:
+			if (stereo)
+				return AL_FORMAT_STEREO16;
+			else
+				return AL_FORMAT_MONO16;
+		case 8:
+			if (stereo)
+				return AL_FORMAT_STEREO8;
+			else
+				return AL_FORMAT_MONO8;
+		default:
+			return -1;
+		}
+	}
+
+	static inline bool savePCMToBuffer(AudioFile<double> file, std::vector<uint8_t>& fileData)
+	{
+		auto bitDepth = file.getBitDepth();
+		fileData.clear();
+
+		int16_t audioFormat = bitDepth == 32 ? WavAudioFormat::IEEEFloat : WavAudioFormat::PCM;
+
+		for (int i = 0; i < file.getNumSamplesPerChannel(); i++)
+		{
+			for (int channel = 0; channel < file.getNumChannels(); channel++)
+			{
+				if (bitDepth == 8)
+				{
+					uint8_t byte = sampleToSingleByte(file.samples[channel][i]);
+					fileData.push_back(byte);
+				}
+				else if (bitDepth == 16)
+				{
+					int16_t sampleAsInt = sampleToSixteenBitInt(file.samples[channel][i]);
+					addInt16ToFileData(fileData, sampleAsInt, true);
+				}
+				else if (bitDepth == 24)
+				{
+					int32_t sampleAsIntAgain = (int32_t)(file.samples[channel][i] * (double)8388608.);
+
+					uint8_t bytes[3];
+					bytes[2] = (uint8_t)(sampleAsIntAgain >> 16) & 0xFF;
+					bytes[1] = (uint8_t)(sampleAsIntAgain >> 8) & 0xFF;
+					bytes[0] = (uint8_t)sampleAsIntAgain & 0xFF;
+
+					fileData.push_back(bytes[0]);
+					fileData.push_back(bytes[1]);
+					fileData.push_back(bytes[2]);
+				}
+				else if (bitDepth == 32)
+				{
+					int32_t sampleAsInt;
+
+					if (audioFormat == WavAudioFormat::IEEEFloat)
+						sampleAsInt = (int32_t) reinterpret_cast<int32_t&> (file.samples[channel][i]);
+					else // assume PCM
+						sampleAsInt = (int32_t)(file.samples[channel][i] * std::numeric_limits<int32_t>::max());
+
+					addInt32ToFileData(fileData, sampleAsInt, true);
+				}
+				else
+				{
+					assert(false && "Trying to write a file with unsupported bit depth");
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
 	void GameAudio::loadDataIntoBuffers()
 	{
 		//Music: https://www.bensound.com
         std::string file_name = "Audio/bensound-epic.wav";
 		//alutLoadWAVFile(&file_name[0], &format, &data, &size, &freq, &al_bool);
-		AudioFile<double> file;
-		if(!file.load(file_name))
+		AudioFile<double> audioFile;
+		if(!audioFile.load(file_name))
 		{
 			printf("Error loading file %s \n", file_name.c_str());
 			exit(1);
@@ -213,9 +349,13 @@ namespace game
 		else
 		{
 			//TODO: Finish fixing this per https://github.com/adamstark/AudioFile/issues/9#issuecomment-670521283
-			data = reinterpret_cast<ALvoid*>(file.samples[0].data());
-			size = file.samples[0].size();
-			freq = file.getSampleRate();
+			std::vector<uint8_t> audioData;
+			savePCMToBuffer(audioFile, audioData);
+
+			data = reinterpret_cast<ALvoid*>(audioData.data());
+			size = audioData.size();
+			freq = audioFile.getSampleRate();
+			format = toOpenAlFormat(audioFile.getNumChannels(),  audioFile.getBitDepth());
 			alBufferData(buffer[0], format, data, size, freq);
 		}
 		printf("%s\n", &file_name[0]);
