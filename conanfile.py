@@ -18,4 +18,3 @@ class GameConan(ConanFile):
         cmake.definitions["CMAKE_EXPORT_COMPILE_COMMANDS"] = "ON"
         cmake.configure()
         cmake.build()
-        cmake.test()
